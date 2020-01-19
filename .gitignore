@@ -3,3 +3,5 @@ venv
 **/*.pyc
 **/*checkpoint.ipynb
 secrets
+.python
+*.h5
