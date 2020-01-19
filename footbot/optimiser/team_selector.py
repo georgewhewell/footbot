@@ -1,6 +1,5 @@
 import cvxpy as cp
 import numpy as np
-from footbot.data import element_data
 import requests
 
 
@@ -149,18 +148,17 @@ def select_team(
 
 
 def optimise_entry(
-		entry,
-		total_budget=1000,
-		bench_factor=0.1,
-		transfer_penalty=4,
-		transfer_limit=15
+	df,
+	entry,
+	total_budget=1000,
+	bench_factor=0.1,
+	transfer_penalty=4,
+	transfer_limit=15
 ):
 	'''
 	optimise a given entry based on their picks
 	for the current event
 	'''
-
-	df = element_data.get_element_df()
 	df['average_points'] = df['total_points'] / df['current_event']
 	df = df[[
 		'element',

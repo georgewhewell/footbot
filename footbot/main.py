@@ -83,8 +83,9 @@ def optimise_team_route(entry):
     bench_factor = float(request.args.get('bench_factor', 0.1))
     transfer_penalty = float(request.args.get('transfer_penalty', 4))
     transfer_limit = int(request.args.get('transfer_limit', 15))
-
+    df = element_data.get_element_df()
     return team_selector.optimise_entry(
+        df,
         entry,
         total_budget=total_budget,
         bench_factor=bench_factor,
