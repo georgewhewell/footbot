@@ -1,14 +1,11 @@
 import pandas as pd
 import requests
-from footbot.data import utils
+from footbot.data import utils, storage
 
 
 def get_top_entries():
     '''get top entries from bigquery'''
-    client = utils.set_up_bigquery()
-    sql = 'SELECT * FROM `footbot-001.fpl.top_entries_1920`'
-
-    return list(client.query(sql).to_dataframe()['entry'].values)
+    return list(storage.get_entry_df()['entry'].values)
 
 
 def get_top_entries_dfs():

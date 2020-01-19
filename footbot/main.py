@@ -1,5 +1,5 @@
 import logging
-from footbot.data import element_data, entry_data, utils
+from footbot.data import element_data, entry_data, storage
 from footbot.optimiser import team_selector
 from flask import Flask, request
 import multiprocessing as mp
@@ -15,7 +15,7 @@ def element_data_job():
     logger.info('getting element data')
     element_df = element_data.get_element_df()
     logger.info('writing element data')
-    utils.write_to_table('fpl',
+    storage.write_to_table('fpl',
                          'element_data_1920',
                          element_df)
     logger.info('done writing element data')
@@ -23,13 +23,13 @@ def element_data_job():
     logger.info('getting element gameweeks and fixtures')
     element_history_df, element_fixtures_df = element_data.get_element_summary_dfs()
     logger.info('writing element gameweeks')
-    utils.write_to_table('fpl',
+    storage.write_to_table('fpl',
                          'element_gameweeks_1920',
                          element_history_df,
                          write_disposition='WRITE_TRUNCATE')
     logger.info('done writing element gameweeks')
     logger.info('writing element fixtures')
-    utils.write_to_table('fpl',
+    storage.write_to_table('fpl',
                          'element_future_fixtures_1920',
                          element_fixtures_df,
                          write_disposition='WRITE_TRUNCATE')
@@ -42,13 +42,13 @@ def entry_data_job():
     logger.info('getting entry data')
     picks_df, chips_df = entry_data.get_top_entries_dfs()
     logger.info('writing entry picks')
-    utils.write_to_table('fpl',
+    storage.write_to_table('fpl',
                          'top_entries_picks_1920',
                          picks_df,
                          write_disposition='WRITE_TRUNCATE')
     logger.info('done writing entry picks')
     logger.info('writing entry chips')
-    utils.write_to_table('fpl',
+    storage.write_to_table('fpl',
                          'top_entries_chips_1920',
                          chips_df,
                          write_disposition='WRITE_TRUNCATE')
